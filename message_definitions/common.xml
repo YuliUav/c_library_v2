@@ -3922,7 +3922,7 @@
                <field type="uint8_t" name="length">data length</field>
                <field type="uint8_t" name="first_message_offset">offset into data where first message starts. This can be used for recovery, when a previous message got lost (set to 255 if no start exists).</field>
                <field type="uint8_t[249]" name="data">logged data</field>
-          </message>
+        </message>
           <message id="267" name="LOGGING_DATA_ACKED">
                <description>A message containing logged data which requires a LOGGING_ACK to be sent back</description>
                <field type="uint8_t" name="target_system">system ID of the target</field>
@@ -3931,12 +3931,51 @@
                <field type="uint8_t" name="length">data length</field>
                <field type="uint8_t" name="first_message_offset">offset into data where first message starts. This can be used for recovery, when a previous message got lost (set to 255 if no start exists).</field>
                <field type="uint8_t[249]" name="data">logged data</field>
-          </message>
+        </message>
           <message id="268" name="LOGGING_ACK">
                <description>An ack for a LOGGING_DATA_ACKED message</description>
                <field type="uint8_t" name="target_system">system ID of the target</field>
                <field type="uint8_t" name="target_component">component ID of the target</field>
                <field type="uint16_t" name="sequence">sequence number (must match the one in LOGGING_DATA_ACKED)</field>
-          </message>
+        </message>
+
+        <message id="150" name="VISION_DATA">
+            <description>data from dual vision</description>
+            <field type="float" name="vision_x">x position while dual camera is valid</field>
+            <field type="float" name="vision_y">y position while dual camera is valid</field>
+            <field type="float" name="vision_z">z position while dual camera is valid</field>
+            <field type="float" name="vision_vx">vx while dual camera is valid</field>
+            <field type="float" name="vision_vy">vy while dual camera is valid</field>
+            <field type="float" name="vision_vz">vz while dual camera is valid</field>
+            <field type="uint32_t" name="pixel_x">target is x pixels away from the center of a picture. It is only used while dual camera is invalid.</field>
+            <field type="uint32_t" name="pixel_y">target is y pixels away from the center of a picture. It is only used while dual camera is invalid.</field>   
+            <field type="int8_t" name="status">is the vision data valid. 0: invalid, 1:valid</field>
+        </message>
+
+        <message id="151" name="FORMATION">
+            <description>data used for formation communication</description>
+            <field type="int32_t" name="lon">WGS84 lontitude, expressed as degrees * 1E7</field>
+            <field type="int32_t" name="lat">WGS84 latitude, expressed as degrees * 1E7</field>
+            <field type="int32_t" name="alt">Altitude in meters, expressed as * 1000 (millimeters), AMSL (not WGS84 - note that virtually all GPS modules provide the AMSL as well)</field>
+            <field type="float" name="vel_n">velocity in north, expressed as m/s</field>
+            <field type="float" name="vel_e">velocity in east, expressed as m/s</field>
+            <field type="float" name="vel_d">velocity down, expressed as m/s</field>
+            <field type="int8_t" name="status">status, 0:on ground, 1:take off, 2:hover, 3:formation, 4:docking, 5:return, 6:land</field>
+        </message>
+
+        <message id="152" name="FORMATION_TO_GCS">
+            <description>data from dual vision</description>
+            <field type="float" name="dock_time">docking time</field>
+            <field type="int8_t" name="dock_status">-1:dock failed, 0:dock timeout, 1:dock success</field>
+            <field type="int8_t" name="status">status, 0:on ground, 1:take off, 2:hover, 3:formation, 4:docking, 5:return, 6:land</field>
+        </message>
+
+        <message id="153" name="GCS_TO_FORMATION">
+            <description>data from GCS to formation</description>
+            <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
+            <field type="int32_t" name="lon">WGS84 lontitude, expressed as degrees * 1E7</field>
+            <field type="int32_t" name="lat">WGS84 latitude, expressed as degrees * 1E7</field>
+            <field type="int32_t" name="alt">Altitude in meters, expressed as * 1000 (millimeters), AMSL (not WGS84 - note that virtually all GPS modules provide the AMSL as well)</field>  
+        </message>
     </messages>
 </mavlink>
