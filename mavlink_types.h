@@ -1,12 +1,16 @@
-#ifndef MAVLINK_TYPES_H_
-#define MAVLINK_TYPES_H_
+#pragma once
 
 // Visual Studio versions before 2010 don't have stdint.h, so we just error out.
 #if (defined _MSC_VER) && (_MSC_VER < 1600)
 #error "The C-MAVLink implementation requires Visual Studio 2010 or greater"
 #endif
 
+#include <stdbool.h>
 #include <stdint.h>
+
+#ifdef MAVLINK_USE_CXX_NAMESPACE
+namespace mavlink {
+#endif
 
 // Macro to define packed structures
 #ifdef __GNUC__
@@ -234,15 +238,18 @@ typedef bool (*mavlink_accept_unsigned_t)(const mavlink_status_t *status, uint32
 /*
   flags controlling signing
  */
-#define MAVLINK_SIGNING_FLAG_SIGN_OUTGOING 1
+#define MAVLINK_SIGNING_FLAG_SIGN_OUTGOING 1    ///< Enable outgoing signing
+// This disables protection against replay attacks, but can be necessary for systems without a proper time base
+#define MAVLINK_SIGNING_FLAG_NO_TIMESTAMPS 2    ///< Ignore timestamp mismatches
+
 
 /*
   state of MAVLink signing for this channel
  */
 typedef struct __mavlink_signing {
     uint8_t flags;                     ///< MAVLINK_SIGNING_FLAG_*
-    uint8_t link_id;
-    uint64_t timestamp;
+    uint8_t link_id;                   ///< Same as MAVLINK_CHANNEL
+    uint64_t timestamp;                ///< Timestamp, in microseconds since UNIX epoch GMT
     uint8_t secret_key[32];
     mavlink_accept_unsigned_t accept_unsigned_callback;
 } mavlink_signing_t;
@@ -257,10 +264,10 @@ typedef struct __mavlink_signing {
 typedef struct __mavlink_signing_streams {
     uint16_t num_signing_streams;
     struct __mavlink_signing_stream {
-        uint8_t link_id;
-        uint8_t sysid;
-        uint8_t compid;
-        uint8_t timestamp_bytes[6];
+        uint8_t link_id;              ///< ID of the link (MAVLINK_CHANNEL)
+        uint8_t sysid;                ///< Remote system ID
+        uint8_t compid;               ///< Remote component ID
+        uint8_t timestamp_bytes[6];   ///< Timestamp, in microseconds since UNIX epoch GMT
     } stream[MAVLINK_MAX_SIGNING_STREAMS];
 } mavlink_signing_streams_t;
 
@@ -289,4 +296,6 @@ typedef struct __mavlink_msg_entry {
 #define MAVLINK_IFLAG_SIGNED  0x01
 #define MAVLINK_IFLAG_MASK    0x01 // mask of all understood bits
 
-#endif /* MAVLINK_TYPES_H_ */
+#ifdef MAVLINK_USE_CXX_NAMESPACE
+} // namespace mavlink
+#endif

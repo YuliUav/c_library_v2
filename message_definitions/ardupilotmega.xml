@@ -1571,7 +1571,7 @@
             <field name="rpm1" type="float">RPM Sensor1</field>
             <field name="rpm2" type="float">RPM Sensor2</field>
         </message>
-
+       
         <!-- ardupilot specific mavlink2 messages starting at 11000-->
         <message id="11000" name="DEVICE_OP_READ">
             <description>Read registers for a device</description>

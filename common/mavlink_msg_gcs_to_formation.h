@@ -1,6 +1,7 @@
+#pragma once
 // MESSAGE GCS_TO_FORMATION PACKING
 
-#define MAVLINK_MSG_ID_GCS_TO_FORMATION 153
+#define MAVLINK_MSG_ID_GCS_TO_FORMATION 239
 
 MAVPACKED(
 typedef struct __mavlink_gcs_to_formation_t {
@@ -12,20 +13,20 @@ typedef struct __mavlink_gcs_to_formation_t {
 
 #define MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN 20
 #define MAVLINK_MSG_ID_GCS_TO_FORMATION_MIN_LEN 20
-#define MAVLINK_MSG_ID_153_LEN 20
-#define MAVLINK_MSG_ID_153_MIN_LEN 20
+#define MAVLINK_MSG_ID_239_LEN 20
+#define MAVLINK_MSG_ID_239_MIN_LEN 20
 
 #define MAVLINK_MSG_ID_GCS_TO_FORMATION_CRC 115
-#define MAVLINK_MSG_ID_153_CRC 115
+#define MAVLINK_MSG_ID_239_CRC 115
 
 
 
 #if MAVLINK_COMMAND_24BIT
 #define MAVLINK_MESSAGE_INFO_GCS_TO_FORMATION { \
-	153, \
-	"GCS_TO_FORMATION", \
-	4, \
-	{  { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_gcs_to_formation_t, time_usec) }, \
+    239, \
+    "GCS_TO_FORMATION", \
+    4, \
+    {  { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_gcs_to_formation_t, time_usec) }, \
          { "lon", NULL, MAVLINK_TYPE_INT32_T, 0, 8, offsetof(mavlink_gcs_to_formation_t, lon) }, \
          { "lat", NULL, MAVLINK_TYPE_INT32_T, 0, 12, offsetof(mavlink_gcs_to_formation_t, lat) }, \
          { "alt", NULL, MAVLINK_TYPE_INT32_T, 0, 16, offsetof(mavlink_gcs_to_formation_t, alt) }, \
@@ -33,9 +34,9 @@ typedef struct __mavlink_gcs_to_formation_t {
 }
 #else
 #define MAVLINK_MESSAGE_INFO_GCS_TO_FORMATION { \
-	"GCS_TO_FORMATION", \
-	4, \
-	{  { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_gcs_to_formation_t, time_usec) }, \
+    "GCS_TO_FORMATION", \
+    4, \
+    {  { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_gcs_to_formation_t, time_usec) }, \
          { "lon", NULL, MAVLINK_TYPE_INT32_T, 0, 8, offsetof(mavlink_gcs_to_formation_t, lon) }, \
          { "lat", NULL, MAVLINK_TYPE_INT32_T, 0, 12, offsetof(mavlink_gcs_to_formation_t, lat) }, \
          { "alt", NULL, MAVLINK_TYPE_INT32_T, 0, 16, offsetof(mavlink_gcs_to_formation_t, alt) }, \
@@ -56,27 +57,27 @@ typedef struct __mavlink_gcs_to_formation_t {
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_gcs_to_formation_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-						       uint64_t time_usec, int32_t lon, int32_t lat, int32_t alt)
+                               uint64_t time_usec, int32_t lon, int32_t lat, int32_t alt)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-	char buf[MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN];
-	_mav_put_uint64_t(buf, 0, time_usec);
-	_mav_put_int32_t(buf, 8, lon);
-	_mav_put_int32_t(buf, 12, lat);
-	_mav_put_int32_t(buf, 16, alt);
+    char buf[MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN];
+    _mav_put_uint64_t(buf, 0, time_usec);
+    _mav_put_int32_t(buf, 8, lon);
+    _mav_put_int32_t(buf, 12, lat);
+    _mav_put_int32_t(buf, 16, alt);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN);
 #else
-	mavlink_gcs_to_formation_t packet;
-	packet.time_usec = time_usec;
-	packet.lon = lon;
-	packet.lat = lat;
-	packet.alt = alt;
+    mavlink_gcs_to_formation_t packet;
+    packet.time_usec = time_usec;
+    packet.lon = lon;
+    packet.lat = lat;
+    packet.alt = alt;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN);
 #endif
 
-	msg->msgid = MAVLINK_MSG_ID_GCS_TO_FORMATION;
+    msg->msgid = MAVLINK_MSG_ID_GCS_TO_FORMATION;
     return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_GCS_TO_FORMATION_MIN_LEN, MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN, MAVLINK_MSG_ID_GCS_TO_FORMATION_CRC);
 }
 
@@ -93,28 +94,28 @@ static inline uint16_t mavlink_msg_gcs_to_formation_pack(uint8_t system_id, uint
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_gcs_to_formation_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
-							   mavlink_message_t* msg,
-						           uint64_t time_usec,int32_t lon,int32_t lat,int32_t alt)
+                               mavlink_message_t* msg,
+                                   uint64_t time_usec,int32_t lon,int32_t lat,int32_t alt)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-	char buf[MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN];
-	_mav_put_uint64_t(buf, 0, time_usec);
-	_mav_put_int32_t(buf, 8, lon);
-	_mav_put_int32_t(buf, 12, lat);
-	_mav_put_int32_t(buf, 16, alt);
+    char buf[MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN];
+    _mav_put_uint64_t(buf, 0, time_usec);
+    _mav_put_int32_t(buf, 8, lon);
+    _mav_put_int32_t(buf, 12, lat);
+    _mav_put_int32_t(buf, 16, alt);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN);
 #else
-	mavlink_gcs_to_formation_t packet;
-	packet.time_usec = time_usec;
-	packet.lon = lon;
-	packet.lat = lat;
-	packet.alt = alt;
+    mavlink_gcs_to_formation_t packet;
+    packet.time_usec = time_usec;
+    packet.lon = lon;
+    packet.lat = lat;
+    packet.alt = alt;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN);
 #endif
 
-	msg->msgid = MAVLINK_MSG_ID_GCS_TO_FORMATION;
+    msg->msgid = MAVLINK_MSG_ID_GCS_TO_FORMATION;
     return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_GCS_TO_FORMATION_MIN_LEN, MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN, MAVLINK_MSG_ID_GCS_TO_FORMATION_CRC);
 }
 
@@ -128,7 +129,7 @@ static inline uint16_t mavlink_msg_gcs_to_formation_pack_chan(uint8_t system_id,
  */
 static inline uint16_t mavlink_msg_gcs_to_formation_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_gcs_to_formation_t* gcs_to_formation)
 {
-	return mavlink_msg_gcs_to_formation_pack(system_id, component_id, msg, gcs_to_formation->time_usec, gcs_to_formation->lon, gcs_to_formation->lat, gcs_to_formation->alt);
+    return mavlink_msg_gcs_to_formation_pack(system_id, component_id, msg, gcs_to_formation->time_usec, gcs_to_formation->lon, gcs_to_formation->lat, gcs_to_formation->alt);
 }
 
 /**
@@ -142,7 +143,7 @@ static inline uint16_t mavlink_msg_gcs_to_formation_encode(uint8_t system_id, ui
  */
 static inline uint16_t mavlink_msg_gcs_to_formation_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_gcs_to_formation_t* gcs_to_formation)
 {
-	return mavlink_msg_gcs_to_formation_pack_chan(system_id, component_id, chan, msg, gcs_to_formation->time_usec, gcs_to_formation->lon, gcs_to_formation->lat, gcs_to_formation->alt);
+    return mavlink_msg_gcs_to_formation_pack_chan(system_id, component_id, chan, msg, gcs_to_formation->time_usec, gcs_to_formation->lon, gcs_to_formation->lat, gcs_to_formation->alt);
 }
 
 /**
@@ -159,19 +160,19 @@ static inline uint16_t mavlink_msg_gcs_to_formation_encode_chan(uint8_t system_i
 static inline void mavlink_msg_gcs_to_formation_send(mavlink_channel_t chan, uint64_t time_usec, int32_t lon, int32_t lat, int32_t alt)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-	char buf[MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN];
-	_mav_put_uint64_t(buf, 0, time_usec);
-	_mav_put_int32_t(buf, 8, lon);
-	_mav_put_int32_t(buf, 12, lat);
-	_mav_put_int32_t(buf, 16, alt);
+    char buf[MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN];
+    _mav_put_uint64_t(buf, 0, time_usec);
+    _mav_put_int32_t(buf, 8, lon);
+    _mav_put_int32_t(buf, 12, lat);
+    _mav_put_int32_t(buf, 16, alt);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_GCS_TO_FORMATION, buf, MAVLINK_MSG_ID_GCS_TO_FORMATION_MIN_LEN, MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN, MAVLINK_MSG_ID_GCS_TO_FORMATION_CRC);
 #else
-	mavlink_gcs_to_formation_t packet;
-	packet.time_usec = time_usec;
-	packet.lon = lon;
-	packet.lat = lat;
-	packet.alt = alt;
+    mavlink_gcs_to_formation_t packet;
+    packet.time_usec = time_usec;
+    packet.lon = lon;
+    packet.lat = lat;
+    packet.alt = alt;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_GCS_TO_FORMATION, (const char *)&packet, MAVLINK_MSG_ID_GCS_TO_FORMATION_MIN_LEN, MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN, MAVLINK_MSG_ID_GCS_TO_FORMATION_CRC);
 #endif
@@ -202,19 +203,19 @@ static inline void mavlink_msg_gcs_to_formation_send_struct(mavlink_channel_t ch
 static inline void mavlink_msg_gcs_to_formation_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint64_t time_usec, int32_t lon, int32_t lat, int32_t alt)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-	char *buf = (char *)msgbuf;
-	_mav_put_uint64_t(buf, 0, time_usec);
-	_mav_put_int32_t(buf, 8, lon);
-	_mav_put_int32_t(buf, 12, lat);
-	_mav_put_int32_t(buf, 16, alt);
+    char *buf = (char *)msgbuf;
+    _mav_put_uint64_t(buf, 0, time_usec);
+    _mav_put_int32_t(buf, 8, lon);
+    _mav_put_int32_t(buf, 12, lat);
+    _mav_put_int32_t(buf, 16, alt);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_GCS_TO_FORMATION, buf, MAVLINK_MSG_ID_GCS_TO_FORMATION_MIN_LEN, MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN, MAVLINK_MSG_ID_GCS_TO_FORMATION_CRC);
 #else
-	mavlink_gcs_to_formation_t *packet = (mavlink_gcs_to_formation_t *)msgbuf;
-	packet->time_usec = time_usec;
-	packet->lon = lon;
-	packet->lat = lat;
-	packet->alt = alt;
+    mavlink_gcs_to_formation_t *packet = (mavlink_gcs_to_formation_t *)msgbuf;
+    packet->time_usec = time_usec;
+    packet->lon = lon;
+    packet->lat = lat;
+    packet->alt = alt;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_GCS_TO_FORMATION, (const char *)packet, MAVLINK_MSG_ID_GCS_TO_FORMATION_MIN_LEN, MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN, MAVLINK_MSG_ID_GCS_TO_FORMATION_CRC);
 #endif
@@ -233,7 +234,7 @@ static inline void mavlink_msg_gcs_to_formation_send_buf(mavlink_message_t *msgb
  */
 static inline uint64_t mavlink_msg_gcs_to_formation_get_time_usec(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_uint64_t(msg,  0);
+    return _MAV_RETURN_uint64_t(msg,  0);
 }
 
 /**
@@ -243,7 +244,7 @@ static inline uint64_t mavlink_msg_gcs_to_formation_get_time_usec(const mavlink_
  */
 static inline int32_t mavlink_msg_gcs_to_formation_get_lon(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_int32_t(msg,  8);
+    return _MAV_RETURN_int32_t(msg,  8);
 }
 
 /**
@@ -253,7 +254,7 @@ static inline int32_t mavlink_msg_gcs_to_formation_get_lon(const mavlink_message
  */
 static inline int32_t mavlink_msg_gcs_to_formation_get_lat(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_int32_t(msg,  12);
+    return _MAV_RETURN_int32_t(msg,  12);
 }
 
 /**
@@ -263,7 +264,7 @@ static inline int32_t mavlink_msg_gcs_to_formation_get_lat(const mavlink_message
  */
 static inline int32_t mavlink_msg_gcs_to_formation_get_alt(const mavlink_message_t* msg)
 {
-	return _MAV_RETURN_int32_t(msg,  16);
+    return _MAV_RETURN_int32_t(msg,  16);
 }
 
 /**
@@ -275,13 +276,13 @@ static inline int32_t mavlink_msg_gcs_to_formation_get_alt(const mavlink_message
 static inline void mavlink_msg_gcs_to_formation_decode(const mavlink_message_t* msg, mavlink_gcs_to_formation_t* gcs_to_formation)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-	gcs_to_formation->time_usec = mavlink_msg_gcs_to_formation_get_time_usec(msg);
-	gcs_to_formation->lon = mavlink_msg_gcs_to_formation_get_lon(msg);
-	gcs_to_formation->lat = mavlink_msg_gcs_to_formation_get_lat(msg);
-	gcs_to_formation->alt = mavlink_msg_gcs_to_formation_get_alt(msg);
+    gcs_to_formation->time_usec = mavlink_msg_gcs_to_formation_get_time_usec(msg);
+    gcs_to_formation->lon = mavlink_msg_gcs_to_formation_get_lon(msg);
+    gcs_to_formation->lat = mavlink_msg_gcs_to_formation_get_lat(msg);
+    gcs_to_formation->alt = mavlink_msg_gcs_to_formation_get_alt(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN? msg->len : MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN;
         memset(gcs_to_formation, 0, MAVLINK_MSG_ID_GCS_TO_FORMATION_LEN);
-	memcpy(gcs_to_formation, _MAV_PAYLOAD(msg), len);
+    memcpy(gcs_to_formation, _MAV_PAYLOAD(msg), len);
 #endif
 }

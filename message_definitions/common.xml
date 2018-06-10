@@ -3939,7 +3939,7 @@
                <field type="uint16_t" name="sequence">sequence number (must match the one in LOGGING_DATA_ACKED)</field>
         </message>
 
-        <message id="150" name="VISION_DATA">
+        <message id="236" name="VISION_DATA">
             <description>data from dual vision</description>
             <field type="float" name="vision_x">x position while dual camera is valid</field>
             <field type="float" name="vision_y">y position while dual camera is valid</field>
@@ -3952,7 +3952,7 @@
             <field type="int8_t" name="status">is the vision data valid. 0: invalid, 1:valid</field>
         </message>
 
-        <message id="151" name="FORMATION">
+        <message id="237" name="FORMATION">
             <description>data used for formation communication</description>
             <field type="int32_t" name="lon">WGS84 lontitude, expressed as degrees * 1E7</field>
             <field type="int32_t" name="lat">WGS84 latitude, expressed as degrees * 1E7</field>
@@ -3961,16 +3961,17 @@
             <field type="float" name="vel_e">velocity in east, expressed as m/s</field>
             <field type="float" name="vel_d">velocity down, expressed as m/s</field>
             <field type="int8_t" name="status">status, 0:on ground, 1:take off, 2:hover, 3:formation, 4:docking, 5:return, 6:land</field>
+	    <field type="int8_t" name="kill">kill 0:normal, 1:kill(stop motors)</field>
         </message>
 
-        <message id="152" name="FORMATION_TO_GCS">
+        <message id="238" name="FORMATION_TO_GCS">
             <description>data from dual vision</description>
             <field type="float" name="dock_time">docking time</field>
             <field type="int8_t" name="dock_status">-1:dock failed, 0:dock timeout, 1:dock success</field>
             <field type="int8_t" name="status">status, 0:on ground, 1:take off, 2:hover, 3:formation, 4:docking, 5:return, 6:land</field>
         </message>
 
-        <message id="153" name="GCS_TO_FORMATION">
+        <message id="239" name="GCS_TO_FORMATION">
             <description>data from GCS to formation</description>
             <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
             <field type="int32_t" name="lon">WGS84 lontitude, expressed as degrees * 1E7</field>
